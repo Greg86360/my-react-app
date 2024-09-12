@@ -17,7 +17,8 @@ export default function Content() {
 
   useEffect(() => {
     const fetchTaches = async () => {
-      const res = await fetch('http://localhost:5000/tasks');
+      // const res = await fetch('http://localhost:5000/tasks');
+      const res = await fetch('https://my-app-backend-hazel.vercel.app/');
       const data = await res.json();
       setTaches(data);
       // console.log(data);
