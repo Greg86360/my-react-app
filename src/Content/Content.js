@@ -34,7 +34,7 @@ export default function Content() {
 
   function deleteCard(id) {
     // Envoyer une requête DELETE à l'API
-    fetch(`http://localhost:5000/tasks/${id}`, {
+    fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${id}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -61,7 +61,7 @@ export default function Content() {
 
       // Envoyer la requête PUT au backend
       try {
-        const response = await fetch(`http://localhost:5000/tasks/${selectedTask._id}`, {
+        const response = await fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${selectedTask._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export default function Content() {
         }
       };
 
-      postData('http://localhost:5000/tasks', tache)
+      postData('https://my-app-backend-nxuu.onrender.com/tasks', tache)
         .then(result => {
           console.log('Tâche ajoutée avec succès:', result);
           setTaches(prevTaches => [...prevTaches, result]); // Ajouter la nouvelle tâche au tableau des tâches existant
@@ -139,7 +139,7 @@ export default function Content() {
   const patchTask = async (id, updatedEtat) => {
     try {
 
-      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const response = await fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -163,20 +163,6 @@ export default function Content() {
       console.error('Erreur lors de la mise à jour de la tâche:', error);
     }
   };
-
-  /** Gestion du clic sur la carte (tâche/changement d'état) ****/
-  // Utiliser un état pour suivre si la carte a été cliquée
-  // const [isClicked, setIsClicked] = useState(false);
-  // const [etat, setEtat]=useState();
-
-  // // Fonction pour basculer l'état quand on clique sur la carte
-  // const handleCardClick = (id) => {
-  //   setIsClicked(!isClicked); // On inverse la valeur de isClicked
-  //   setEtat(!etat);
-  //   patchTask(id,etat);
-  // };
-
-
 
   /*** Gestion de la tâche de sélection */
   const handleSelectTask = (tache) => {
