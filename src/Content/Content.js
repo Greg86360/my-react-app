@@ -173,7 +173,7 @@ export default function Content() {
 
 
   return (
-    <div className="container px-3">
+    <div className="container px-3 my-5">
       <h2 className="is-size-4 py-5">Écrivez vos tâches</h2>
       <form onSubmit={handleUpdateTask}>
         <div className="field">
