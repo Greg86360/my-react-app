@@ -25,6 +25,20 @@ export default function Card({ titre, frequence, id, suppr, tache, update, patch
     patch(id, newEtat); // Appelle la fonction pour mettre à jour l'état
   };
 
+   // Cette fonction gère le clic sur le bouton "Modifier"
+   const handleEditClick = (event) => {
+    event.stopPropagation();  // Empêche la propagation de l'événement à la carte
+    console.log("Modifier la tâche:", titre);
+    update(tache);
+  };
+
+     // Cette fonction gère le clic sur le bouton "Supprimer(X)"
+     const handleDeleteClick = (event) => {
+      event.stopPropagation();  // Empêche la propagation de l'événement à la carte
+      console.log("Suppresion de la tâche:", titre);
+      suppr(id);
+    };
+
   return (
     // <div className="card has-background-primary  my-5" onClick={()=>console.log("coucou")}>
     <div
@@ -34,11 +48,13 @@ export default function Card({ titre, frequence, id, suppr, tache, update, patch
         <div className="content column">
           <div className='bouton'>
             <h3 className="px-4">{titre}</h3>
-            <button className="delete" onClick={() => suppr(id)}></button>
+            <button className="delete" onClick={handleDeleteClick}></button>
           </div>
           <p className="is-size-4 px-4">{frequence}</p>
           <div className="bouton update">
-            <button className="button is-white is-outlined" onClick={() => update(tache) && handleEtatChange(tache._id, tache.etat)}>Modifier</button>
+            {/* <button className="button is-white is-outlined" onClick={() => update(tache) && handleEtatChange(tache._id, tache.etat)}>Modifier</button> */}
+            <button className="button is-white is-outlined" onClick={handleEditClick}>Modifier</button>
+
           </div>
         </div>
       </div>
