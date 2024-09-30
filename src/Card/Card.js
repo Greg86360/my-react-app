@@ -52,9 +52,7 @@ export default function Card({ titre, frequence, id, suppr, tache, update, patch
           </div>
           <p className="is-size-4 px-4">{frequence}</p>
           <div className="bouton update">
-            {/* <button className="button is-white is-outlined" onClick={() => update(tache) && handleEtatChange(tache._id, tache.etat)}>Modifier</button> */}
             <button className="button is-white is-outlined" onClick={handleEditClick}>Modifier</button>
-
           </div>
         </div>
       </div>
