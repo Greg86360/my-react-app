@@ -158,7 +158,7 @@ export default function Content() {
         </div>
 
         <div className="control">
-          <button className="button is-link has-background-primary">Créer</button>
+          <button className="button is-link has-background-primary is-fullwidth">Créer</button>
         </div>
       </form>
 

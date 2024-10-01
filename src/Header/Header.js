@@ -1,31 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react'; // Importer useState
 import { Link, useNavigate } from 'react-router-dom';
+import './Header.css';
 
 export default function Header() {
-  const navigate = useNavigate(); // Remplacer useHistory par useNavigate
-  const token = localStorage.getItem('token'); // Vérifie si l'utilisateur est connecté
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const [isActive, setIsActive] = useState(false); // État pour gérer l'ouverture du menu
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Supprime le token du localStorage
-    navigate('/login'); // Redirige vers la page de connexion
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  const toggleMenu = () => {
+    setIsActive(!isActive); // Inverser l'état du menu
   };
 
   return (
-    <nav className="navbar has-background-primary has-text-white is-flex is-justify-content-space-between is-align-items-center p-3">
+    <nav className="navbar has-background-primary has-text-white is-align-items-center p-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <span className="navbar-item has-text-weight-bold is-uppercase">Ma super ToDoList</span>
+        <span className="navbar-item has-text-weight-bold is-uppercase has-text-white has-text-centered-touch	is-size-1 is-size-2-touch			">Ma super ToDoList</span>
+        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-      <div className="navbar-menu">
+      <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className="navbar-end">
-          <Link to="/tasks" className="navbar-item has-text-white">Tâches</Link>
           {token ? (
-            <button onClick={handleLogout} className="navbar-item button is-danger">Se déconnecter</button>
+            <button onClick={handleLogout} className="button is-rounded is-outlined">Se déconnecter</button>
           ) : (
-            <>
-              <Link to="/login" className="navbar-item has-text-white">Se connecter</Link>
-              <Link to="/register" className="navbar-item has-text-white">S'inscrire</Link>
-            </>
+            <div className={`navbar-item ${isActive ? 'is-active' : ''}`}>
+
+              <Link to="/register" className="button is-rounded is-outlined">S'inscrire</Link>
+              <Link to="/login" className="button is-rounded">Se connecter</Link>
+            </div>
+
           )}
+
         </div>
       </div>
     </nav>

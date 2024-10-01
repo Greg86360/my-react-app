@@ -1,0 +1,8 @@
+.navbar-menu .navbar-item {
+    margin-top: 0.5rem; /* Ajoute un peu d'espace entre les éléments */
+  }
+  
+  .navbar-item .button {
+    width: 100%; /* Rendre les boutons de la largeur totale */
+  }
+  

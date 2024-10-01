@@ -24,38 +24,78 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <h2>Inscription</h2>
-      <div>
-        <label>Nom:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+    <section class="section is-flex is-justify-content-center is-align-items-center">
+      <div className="container">
+        <div class="columns is-centered">
+          <div class="column is-half">
+
+            <form onSubmit={handleRegister}>
+              <h1 className="title has-text-centered">Inscription</h1>
+              <div className="field">
+                <label className="label">Nom :</label>
+                <div class="control has-icons-left has-icons-right">
+
+                  <input
+                    type="text"
+                    className="input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-user"></i>                </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Email :</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    type="email"
+                    className="input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Mot de passe :</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    type="password"
+                    className="input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-lock"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <button type="submit" className="button is-primary has-text-white is-fullwidth">S'inscrire</button>
+                </div>
+              </div>
+              {message && <p className="has-text-danger">{message}</p>}
+            </form>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Mot de passe:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">S'inscrire</button>
-      {message && <p>{message}</p>}
-    </form>
+    </section>
   );
 };
 
