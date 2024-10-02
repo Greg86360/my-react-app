@@ -10,7 +10,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/users/register', {
+      const response = await axios.post('https://my-app-backend-nxuu.onrender.com/users/register', {
         name,
         email,
         password,
