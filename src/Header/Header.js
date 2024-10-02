@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <nav className="navbar has-background-primary has-text-white is-align-items-center" role="navigation" aria-label="main navigation">
       <div className="navbar-brand is-flex is-justify-content-center	">
-        <span className="navbar-item has-text-weight-bold is-uppercase has-text-white has-text-centered-touch	is-size-1 is-size-2-touch	p-2">Ma super ToDoList</span>
+        <span className="navbar-item has-text-weight-bold is-uppercase has-text-white has-text-centered-touch	is-size-1 is-size-3-touch">Ma super ToDoList</span>
 
       </div>
       <div className="navbar-end">
