@@ -100,8 +100,8 @@ const Login = () => {
               <div class="control mt-5 is-flex is-justify-content-flex-end">
 
                 <button type="submit" class="button is-primary has-text-white is-fullwidth">Se connecter</button>
-                {message && <p>{message}</p>}
               </div>
+                {message && <p class="help is-danger mt-2">{message}</p>}
             </form>
           </div>
         </div>
