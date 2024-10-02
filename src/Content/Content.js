@@ -15,7 +15,7 @@ export default function Content() {
   useEffect(() => {
     const fetchTaches = async () => {
       try {
-        const res = await fetch('http://localhost:5000/tasks', {
+        const res = await fetch('https://my-app-backend-nxuu.onrender.com/tasks', {
           headers: {
             'Authorization': `Bearer ${token}`, // Envoi du token dans l'en-tête
           },
@@ -32,7 +32,7 @@ export default function Content() {
   /**** Suppression d'une tâche *********/
   const deleteCard = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const response = await fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`, // Envoi du token dans l'en-tête
@@ -58,7 +58,7 @@ export default function Content() {
       const updatedTask = { titre, frequence };
 
       try {
-        const response = await fetch(`http://localhost:5000/tasks/${selectedTask._id}`, {
+        const response = await fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${selectedTask._id}`, {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`, // Envoi du token dans l'en-tête
@@ -84,7 +84,7 @@ export default function Content() {
       const newTask = { titre, frequence };
 
       try {
-        const response = await fetch('http://localhost:5000/tasks', {
+        const response = await fetch('https://my-app-backend-nxuu.onrender.com/tasks', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`, // Envoi du token dans l'en-tête
@@ -110,7 +110,7 @@ export default function Content() {
   /*** Mise à jour de l'état de la tâche (PATCH) */
   const patchTask = async (id, updatedEtat) => {
     try {
-      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const response = await fetch(`https://my-app-backend-nxuu.onrender.com/tasks/${id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`, // Envoi du token dans l'en-tête
