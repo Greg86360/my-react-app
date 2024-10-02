@@ -16,7 +16,7 @@ const Login = () => {
 
       // Vérifiez les valeurs des variables email et password
 
-      const response = await axios.post('http://my-app-backend-nxuu.onrender.com/users/login', {
+      const response = await axios.post('https://my-app-backend-nxuu.onrender.com/users/login', {
         email,
         password,
       },
