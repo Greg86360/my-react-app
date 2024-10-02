@@ -4,5 +4,6 @@
   
   .navbar-item .button {
     width: 100%; /* Rendre les boutons de la largeur totale */
+    margin:5px;
   }
   
