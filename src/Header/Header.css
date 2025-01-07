@@ -1,3 +1,9 @@
+.logo {
+  min-width: 10%;
+  max-width: 15%;
+  
+}
+
 .navbar-menu .navbar-item {
     margin-top: 0.5rem; /* Ajoute un peu d'espace entre les éléments */
   }
