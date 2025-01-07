@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from '../Card/Card';
+import Loader from '../Loader/Loader';
 import './Content.css';
 
 export default function Content() {
@@ -7,6 +8,8 @@ export default function Content() {
   const [titre, setTitre] = useState('');
   const [frequence, setFrequence] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Ajout de l'état pour le chargement
+
 
   // Récupérer le token JWT depuis localStorage
   const token = localStorage.getItem('token');
@@ -21,13 +24,16 @@ export default function Content() {
           },
         });
         const data = await res.json();
-        setTaches(data);
+        setTaches(data); // Mise à jour des tâches avec les données récupérées
       } catch (error) {
         console.error('Erreur lors de la récupération des tâches:', error);
+      } finally {
+        setIsLoading(false); // Fin du chargement dans tous les cas
       }
     };
     fetchTaches();
   }, [token]);
+  
 
   /**** Suppression d'une tâche *********/
   const deleteCard = async (id) => {
@@ -141,42 +147,48 @@ export default function Content() {
 
   return (
     <div className="container px-3 my-5">
-      <h2 className="is-size-4 py-5">Écrivez vos tâches</h2>
-      <form onSubmit={handleUpdateTask}>
-        <div className="field">
-          <div className="control">
-            <label htmlFor="tache" className="label">Titre</label>
-            <input type="text" id="tache" className="input" value={titre} onChange={e => setTitre(e.target.value)} />
-          </div>
-        </div>
-
-        <div className="field">
-          <div className="control">
-            <label htmlFor="frequence" className="label">Fréquence</label>
-            <textarea id="frequence" className="input" value={frequence} onChange={e => setFrequence(e.target.value)} />
-          </div>
-        </div>
-
-        <div className="control">
-          <button className="button is-link has-background-primary is-fullwidth">Créer</button>
-        </div>
-      </form>
-
-      {taches.length > 0 ? (
-        taches.map((tache, index) => (
-          <Card
-            key={index}
-            update={handleSelectTask}
-            id={tache._id}
-            titre={tache.titre}
-            frequence={tache.frequence}
-            suppr={deleteCard}
-            tache={tache}
-            patch={patchTask}
-          />
-        ))
+      {isLoading ? (
+        <Loader />
       ) : (
-        <p>Aucune tâche trouvée.</p>
+        <>
+          <h2 className="is-size-4 py-5">Écrivez vos tâches</h2>
+          <form onSubmit={handleUpdateTask}>
+            <div className="field">
+              <div className="control">
+                <label htmlFor="tache" className="label">Titre</label>
+                <input type="text" id="tache" className="input" value={titre} onChange={e => setTitre(e.target.value)} />
+              </div>
+            </div>
+  
+            <div className="field">
+              <div className="control">
+                <label htmlFor="frequence" className="label">Fréquence</label>
+                <textarea id="frequence" className="input" value={frequence} onChange={e => setFrequence(e.target.value)} />
+              </div>
+            </div>
+  
+            <div className="control">
+              <button className="button is-link has-background-primary is-fullwidth">Créer</button>
+            </div>
+          </form>
+  
+          {taches.length > 0 ? (
+            taches.map((tache, index) => (
+              <Card
+                key={index}
+                update={handleSelectTask}
+                id={tache._id}
+                titre={tache.titre}
+                frequence={tache.frequence}
+                suppr={deleteCard}
+                tache={tache}
+                patch={patchTask}
+              />
+            ))
+          ) : (
+            <p>Aucune tâche trouvée.</p>
+          )}
+        </>
       )}
     </div>
   );

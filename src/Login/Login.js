@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import Loader from '../Loader/Loader'; // Ajustez le chemin si nécessaire
+
 
 
 const Login = () => {
@@ -8,101 +10,93 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate(); // Initialiser useNavigate
+  const [isLoading, setIsLoading] = useState(false); // Ajout de l'état pour le chargement
+
 
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Démarrer le loader
     try {
-
-      // Vérifiez les valeurs des variables email et password
-
       const response = await axios.post('https://my-app-backend-nxuu.onrender.com/users/login', {
         email,
         password,
       },
-        {
-          headers: {
-            'Content-Type': 'application/json', // Assurez-vous que les en-têtes sont définis correctement
-          }
-        });
-
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
       // Stocke le token dans le localStorage
       localStorage.setItem('token', response.data.token);
       setMessage('Connexion réussie');
-      console.log(localStorage.getItem('token'));
-
-      console.log(response.data);
-
+  
       // Rediriger vers la liste des tâches après connexion réussie
-      navigate('/tasks'); // Rediriger vers la page des tâches
-
+      navigate('/tasks');
     } catch (error) {
-      // Ajout de logs détaillés de l'erreur
-      if (error.response) {
-        // Le serveur a répondu avec un code d'erreur (4xx ou 5xx)
-        console.error('Error Response Data:', error.response.data);
-        console.error('Error Response Status:', error.response.status);
-        console.error('Error Response Headers:', error.response.headers);
-      } else if (error.request) {
-        // La requête a été faite mais aucune réponse n'a été reçue
-        console.error('Error Request:', error.request);
-      } else {
-        // Quelque chose s'est mal passé lors de la configuration de la requête
-        console.error('Error Message:', error.message);
-      }
       setMessage('Erreur lors de la connexion');
-      console.error('Error logging in:', error);
+      console.error('Erreur:', error);
+    } finally {
+      setIsLoading(false); // Arrêter le loader
     }
   };
+  
 
   return (
-    <section class="section is-flex is-justify-content-center is-align-items-center">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-half">
-            <h1 class="title has-text-centered">Connexion</h1>
-            <form onSubmit={handleLogin}>
-              <div class="field">
-                <label class="label">Email :</label>
-                <div class="control has-icons-left has-icons-right">
-                  <input
-                    type="email" class="input"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                  </span>
+    <section className="section is-flex is-justify-content-center is-align-items-center">
+      <div className="container">
+        <div className="columns is-centered">
+          <div className="column is-half">
+            <h1 className="title has-text-centered">Connexion</h1>
+            {isLoading ? (
+              <Loader /> // Affiche le composant Loader
+            ) : (
+              <form onSubmit={handleLogin}>
+                <div className="field">
+                  <label className="label">Email :</label>
+                  <div className="control has-icons-left has-icons-right">
+                    <input
+                      type="email"
+                      className="input"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check"></i>
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div class="field">
-                <label class="label">Mot de passe :</label>
-                <div class="control has-icons-left has-icons-right">
-
-                <input
-                  type="password" class="input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <span class="icon is-small is-left">
-                  <i class="fa-solid fa-lock"></i>
-                </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-check"></i>
-                </span>
-              </div>
-              </div>
-              <div class="control mt-5 is-flex is-justify-content-flex-end">
-
-                <button type="submit" class="button is-primary has-text-white is-fullwidth">Se connecter</button>
-              </div>
-                {message && <p class="help is-danger mt-2">{message}</p>}
-            </form>
+                <div className="field">
+                  <label className="label">Mot de passe :</label>
+                  <div className="control has-icons-left has-icons-right">
+                    <input
+                      type="password"
+                      className="input"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fa-solid fa-lock"></i>
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="control mt-5 is-flex is-justify-content-flex-end">
+                  <button type="submit" className="button is-primary has-text-white is-fullwidth">
+                    Se connecter
+                  </button>
+                </div>
+                {message && <p className="help is-danger mt-2">{message}</p>}
+              </form>
+            )}
           </div>
         </div>
       </div>
